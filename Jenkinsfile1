@@ -45,11 +45,11 @@ pipeline{
                 {
               steps{
                   script{
-		  sh 'cp -r ../devops-training@2/target .'
-                  sh 'docker build . -t pradeepnaikkumta/devops-training:$Docker_tag'
+		  sh 'cp -r ../commit-based-jobs@2/target .'
+                  sh 'docker build . -t pradeepnaikkumta/commit-based-jobs:$Docker_tag'
 		  withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {			    
 				  sh 'docker login -u pradeepnaikkumta -p $docker_password'
-				  sh 'docker push pradeepnaikkumta/devops-training:$Docker_tag'
+				  sh 'docker push pradeepnaikkumta/commit-based-jobs:$Docker_tag'
 			}
                        }
                     }
