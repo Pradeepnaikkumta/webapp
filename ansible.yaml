@@ -1,4 +1,6 @@
 - hosts: test
+  connection: ssh
+  became: true
   tasks:
   - name: copy deployment file to kubernetes master 
     copy:
