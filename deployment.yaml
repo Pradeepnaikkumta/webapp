@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-training
+  name: commit-based-jobs
 spec:
   selector:
     matchLabels:
-      app: devops-training
+      app: commit-based-jobs
   template:
     metadata:
       labels:
-        app: devops-training
+        app: commit-based-jobs
     spec:
       containers:
-      - name: devops-training
+      - name: commit-based-jobs
         image: deekshithsn/devops-training:docker_tag
         command: ["/bin/sh"]
         args: ["-c","sh /usr/local/tomcat/bin/startup.sh;while true; do echo hello; sleep 10;done"]
@@ -24,9 +24,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: devops-training-app-service
+  name: commit-based-jobs-app-service
   labels:
-    app: devops-training
+    app: commit-based-jobs
 spec:
   type: NodePort
   ports:
@@ -35,4 +35,4 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: devops-training
+    app: commit-based-jobs
