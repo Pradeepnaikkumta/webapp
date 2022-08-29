@@ -64,7 +64,7 @@ pipeline{
 				     echo ${final_tag}test
 				     sed -i "s/docker_tag/$final_tag/g"  deployment.yaml
 				     '''
-				    ansiblePlaybook become: true, disableHostKeyChecking: true, installation: 'ansible', playbook: 'ansible.yaml', sudo: true, vaultCredentialsId: 'ssh'
+				    ansiblePlaybook become: true, disableHostKeyChecking: true, installation: 'ansible', playbook: 'ansible.yaml'
 				}
 			}
 		}
