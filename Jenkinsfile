@@ -28,12 +28,14 @@ pipeline{
                       withSonarQubeEnv('sonarserver') { 
                       sh "mvn sonar:sonar"
                        }
-                      timeout(time: 1, unit: 'HOURS') {
-                      def qg = waitForQualityGate()
-                      if (qg.status != 'OK') {
-                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                      }
-                    }
+                     sleep(60)
+			      timeout(time: 1, unit: 'MINUTES') {
+			      def qg = waitForQualityGate()
+				      print "fINISHED WAITING"
+				      if (qg.status != 'OK') {
+					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
+				      }
+                    		}
 		    sh "mvn clean install"
                   }
                 }  
@@ -45,12 +47,11 @@ pipeline{
                 {
               steps{
                   script{
-		 sh 'cp -r ../devops-training@2/target .'
-                   sh 'docker build . -t deekshithsn/devops-training:$Docker_tag'
-		   withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
-				    
-				  sh 'docker login -u deekshithsn -p $docker_password'
-				  sh 'docker push deekshithsn/devops-training:$Docker_tag'
+		 sh 'cp -r ../commit-based-jobs@2/target .'
+                  sh 'docker build . -t pradeepnaikkumta/commit-based-jobs:$Docker_tag'
+		  withCredentials([string(credentialsId: 'dps', variable: 'dockerpass')]) {
+		  sh 'docker login -u pradeepnaikkumta -p $dockerpass'
+		  sh 'docker push pradeepnaikkumta/commit-based-jobs:$Docker_tag'
 			}
                        }
                     }
