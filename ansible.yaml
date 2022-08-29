@@ -1,6 +1,5 @@
+
 - hosts: test
-  connection: ssh
-  become: true
   tasks:
   - name: copy deployment file to kubernetes master 
     copy:
@@ -10,4 +9,3 @@
     command: kubectl delete -f /root/deployment.yaml
   - name: Create a Deployment by reading the definition from a local file
     command: kubectl apply -f /root/deployment.yaml
-      
