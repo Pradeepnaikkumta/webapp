@@ -16,8 +16,10 @@ pipeline{
 			      withSonarQubeEnv('sonarserver') { 
 			      sh "mvn clean sonar:sonar"
                        	     	}
+			      sleep(60)
 			      timeout(time: 1, unit: 'MINUTES') {
 			      def qg = waitForQualityGate()
+				      print "fINISHED WAITING"
 				      if (qg.status != 'OK') {
 					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
 				      }
