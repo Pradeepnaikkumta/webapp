@@ -47,7 +47,7 @@
     </plugins>
   </pluginManagement>
   </build>
-<!--   <build>
+<build>
     <finalName>WebApp</finalName>
-  </build> -->
+  </build>
 </project>
