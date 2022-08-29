@@ -47,8 +47,8 @@ pipeline{
                   script{
 		  sh 'cp -r ../commit-based-jobs@2/target .'
                   sh 'docker build . -t pradeepnaikkumta/commit-based-jobs:$Docker_tag'
-		  withCredentials([string(credentialsId: 'dockerpassword', variable: 'dockerps')]) {
-		  sh 'docker login -u pradeepnaikkumta -p $dockerps'
+		  withCredentials([string(credentialsId: 'dps', variable: 'dockerpass')]) {
+		  sh 'docker login -u pradeepnaikkumta -p $dockerpass'
 		  sh 'docker push pradeepnaikkumta/commit-based-jobs:$Docker_tag'
 				  }
                        }
